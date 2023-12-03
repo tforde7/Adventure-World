@@ -55,6 +55,18 @@ To use this application, follow these steps:
    python3 main.py
    ```
 
+### Running Tests
+
+1. Execute the following command to run the test suite:
+
+    ```bash
+    python -m pytest tests/
+    ```
+
+    This command uses `pytest` to run all the test files located in the `tests/` directory.
+    
+2. After running the tests, review the output in the terminal. Any failures or errors encountered during testing will be displayed, allowing you to troubleshoot and fix issues.
+
 ### Deactivating the Virtual Environment
 
 When you're done using the application, deactivate the virtual environment:

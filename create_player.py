@@ -1,5 +1,8 @@
-from main_menu import show_main_menu
+# from main import show_menu
 from player import Player
+
+class CharacterLengthExceeded(Exception):
+      pass
 
 class PlayerCreator:
     players = []
@@ -8,15 +11,15 @@ class PlayerCreator:
     def __init__(self) -> None:
         pass
 
-    def getName(self):
-        name = ''
-        length_warning = ''
-        while name == '' or len(name) > 12:
-            name = input(f"Enter player name{length_warning}: ")
-            length_warning = " (Maximun 12 charachters)"
-        return name
+    def input_name(self):
+        while True:
+            name = input("Enter player name: ")
+            if len(name) <= 20:
+                return name
+            else:
+                raise CharacterLengthExceeded("Maximun 20 characters")
 
-    def getGender(self):
+    def input_gender(self):
 
         gender = ''
         length_warning = ''
@@ -26,7 +29,7 @@ class PlayerCreator:
 
         return gender
 
-    def getRace(self):
+    def input_race(self):
 
         race = ''
         length_warning = ''
@@ -38,7 +41,7 @@ class PlayerCreator:
 
         return race
 
-    def getWeapon(self):
+    def input_weapon(self):
 
         weapon = ''
         length_warning = ''
@@ -51,13 +54,13 @@ class PlayerCreator:
     
     def create_player(self):
         print("------")
-        name = self.getName()
+        name = self.input_name()
         print("------")
-        gender = self.getGender()
+        gender = self.input_gender()
         print('------')
-        race = self.getRace()
+        race = self.input_race()
         print("------")
-        weapon = self.getWeapon()
+        weapon = self.input_weapon()
         print('------')
         newPlayer = Player(self.player_id, name, gender, race, weapon)
         self.players.append(newPlayer)

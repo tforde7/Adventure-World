@@ -1,7 +1,9 @@
-from main_menu import show_main_menu
+from main_menu import MainMenu
+
+MAIN_MENU = MainMenu()
 
 def show_play_standard_game():
     print("----------------------------")
     print ("Coming Soon!")
     print("----------------------------")
-    show_main_menu()
+    MAIN_MENU.show_menu()
