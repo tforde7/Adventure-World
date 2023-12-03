@@ -84,6 +84,7 @@ def handle_main_menu_choice(user_choice):
     if user_choice == '1':
         newPlayer = PLAYER_CREATOR.create_player()
         avatar_prompt = PLAYER_CREATOR.create_prompt_for_avatar(newPlayer)
+        print("Generating player avatar...")
         generated_image_response = IMAGE_GENERATOR.generate_image(avatar_prompt)
         image = IMAGE_GENERATOR.convert_response_to_image(generated_image_response)
         input("Avatar generated. Press enter to view..")

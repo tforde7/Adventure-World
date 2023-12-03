@@ -12,60 +12,69 @@ class PlayerCreator:
         pass
 
     def input_name(self):
-        while True:
-            name = input("Enter player name: ")
-            if len(name) <= 20:
-                return name
-            else:
-                raise CharacterLengthExceeded("Maximun 20 characters")
+        name = input("Enter player name: ")
+        if len(name) <= 20:
+            return name
+        else:
+            raise CharacterLengthExceeded("Maximum 20 characters")
 
     def input_gender(self):
 
-        gender = ''
-        length_warning = ''
-        while gender == '' or len(gender) > 12:
-            gender = input(f"Enter player gender{length_warning}: ")
-            length_warning = " (Maximun 12 charachters)"
-
-        return gender
+        gender = input("Enter player gender: ")
+        if len(gender) <= 10:
+            return gender
+        else:
+            raise CharacterLengthExceeded("Maximum 10 characters")
 
     def input_race(self):
 
-        race = ''
-        length_warning = ''
-        while race == '' or len(race) > 12:
-            print("Suggestions: Human, Elf, Dwarf")
-            print("   ---   ")
-            race = input(f"Enter player race{length_warning}: ")
-            length_warning = " (Maximun 12 charachters)"
-
-        return race
+        race = input("Enter player race: (Suggestions: Human, Elf, Dwarf etc.)\n")
+        if len(race) <= 12:
+            return race
+        else:
+            raise CharacterLengthExceeded("Maximum 12 characters")
 
     def input_weapon(self):
 
-        weapon = ''
-        length_warning = ''
-        while weapon == '' or len(weapon) > 12:
-            print("Suggestions: Sword, Axe, Hammer")
-            print("   ---   ")
-            weapon = input(f"Enter player name{length_warning}: ")
-            length_warning = " (Maximun 12 charachters)"
-        return weapon
+        weapon = input("Enter player race: (Suggestions: Sword, Axe, Bow etc.)\n")
+        if len(weapon) <= 15:
+            return weapon
+        else:
+            raise CharacterLengthExceeded("Maximum 15 characters")
     
     def create_player(self):
         print("------")
-        name = self.input_name()
+        while True:
+            try:
+                name = self.input_name()
+                break 
+            except CharacterLengthExceeded as exception:
+                print(exception)
         print("------")
-        gender = self.input_gender()
+        while True:
+            try:
+                gender = self.input_gender()
+                break 
+            except CharacterLengthExceeded as exception:
+                print(exception)        
         print('------')
-        race = self.input_race()
+        while True:
+            try:
+                race = self.input_race()
+                break
+            except CharacterLengthExceeded as exception:
+                print(exception)
         print("------")
-        weapon = self.input_weapon()
+        while True:
+            try:
+                weapon = self.input_weapon()
+                break
+            except CharacterLengthExceeded as exception:
+                print(exception)
         print('------')
         newPlayer = Player(self.player_id, name, gender, race, weapon)
         self.players.append(newPlayer)
         self.player_id += 1
-        print("Generating player avatar...")
         return newPlayer
 
     
