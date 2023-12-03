@@ -80,8 +80,6 @@ def play_game():
             print("Invalid direction. Try again.")
 
 
-    
-
 def handle_main_menu_choice(user_choice):
     if user_choice == '1':
         newPlayer = PLAYER_CREATOR.create_player()
@@ -104,7 +102,6 @@ def handle_main_menu_choice(user_choice):
         sys.exit()
 
 def show_menu():
-    # user_choice = show_main_menu()
     MAIN_MENU.show_menu()
     user_choice = MAIN_MENU.get_user_choice()
     handle_main_menu_choice(user_choice)

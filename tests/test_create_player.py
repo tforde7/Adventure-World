@@ -18,6 +18,8 @@ def mock_input(monkeypatch):
     return user_inputs
 
 """
+input_name()
+---
 Equivalence Classes
 ---
 EC1: name length is less than 20 charcters - valid input
