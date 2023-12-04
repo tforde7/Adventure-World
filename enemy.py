@@ -1,9 +1,9 @@
 from enum import Enum
 
 class EnemyType(Enum):
-    GIANT_SPIDER = 1
-    ORC = 2
-    DRAGON = 3
+    GIANT_SPIDER = "Giant Spider"
+    GOBLIN = "Goblin"
+    DRAGON = "Dragon"
 
 class Enemy:
     
@@ -14,7 +14,7 @@ class Enemy:
 
 enemies = [
     Enemy(EnemyType.GIANT_SPIDER, 6, 6),
-    Enemy(EnemyType.ORC, 4, 5),
+    Enemy(EnemyType.GOBLIN, 4, 5),
     Enemy(EnemyType.DRAGON, 8, 8)
     ]
 

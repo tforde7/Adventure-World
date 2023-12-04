@@ -5,8 +5,6 @@ from image_generator import ImageGenerator
 import os
 from play_standard_game import StandardGame
 from play_ai_game import show_play_ai_game
-from options import show_options
-from help import show_help
 import sys
 
 
@@ -69,9 +67,8 @@ def handle_main_menu_choice(user_choice):
     elif user_choice == '3':
         show_play_ai_game()
     elif user_choice == '4':
-        show_help()
-    elif user_choice == '5':
         sys.exit()
+
 
 def show_menu():
     MAIN_MENU.show_menu()

@@ -13,8 +13,7 @@ class MainMenu:
         print ("1. Create Player")
         print ("2. Play Standard Game")
         print ("3. Play AI Game")
-        print ("4. Help")
-        print ("5. Quit")
+        print ("4. Quit")
         print("----------------------------")
         self.choice = input("Your choice: ")
 

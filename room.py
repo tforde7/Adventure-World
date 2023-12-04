@@ -46,22 +46,22 @@ ENEMY_PROBABILITIES = {
     RoomType.CAVE: {
         EnemyType.DRAGON: 0.3,
         EnemyType.GIANT_SPIDER: 0.4,
-        EnemyType.ORC: 0.1
+        EnemyType.GOBLIN: 0.1
     },
     RoomType.FOREST: {
         EnemyType.DRAGON: 0.1,
         EnemyType.GIANT_SPIDER: 0.2,
-        EnemyType.ORC: 0.1
+        EnemyType.GOBLIN: 0.1
     },
     RoomType.MOUNTAIN: {
         EnemyType.DRAGON: 0.4,
         EnemyType.GIANT_SPIDER: 0.1,
-        EnemyType.ORC: 0.1
+        EnemyType.GOBLIN: 0.1
     },
     RoomType.RIVER: {
         EnemyType.DRAGON: 0,
         EnemyType.GIANT_SPIDER: 0.2,
-        EnemyType.ORC: 0.2
+        EnemyType.GOBLIN: 0.2
     }
 }
 

@@ -12,7 +12,6 @@ def show_victory_message():
             return choice
 
 def show_death_message():
-    print("Bad luck you're dead!")
     print("You lost the game. :( )")
     print("Would you like to play again?")
     print("-----")
