@@ -12,61 +12,44 @@ class PlayerCreator:
         pass
 
     def input_name(self):
-        while True:
-            name = input("Enter player name: ")
-            if len(name) <= 20:
-                return name
-            else:
-                raise CharacterLengthExceeded("Maximun 20 characters")
+        name = input("Enter player name: ")
+        if len(name) <= 20:
+            return name
+        else:
+            raise CharacterLengthExceeded("Maximum 20 characters")
 
     def input_gender(self):
 
-        gender = ''
-        length_warning = ''
-        while gender == '' or len(gender) > 12:
-            gender = input(f"Enter player gender{length_warning}: ")
-            length_warning = " (Maximun 12 charachters)"
-
-        return gender
+        gender = input("Enter player gender: ")
+        if len(gender) <= 10:
+            return gender
+        else:
+            raise CharacterLengthExceeded("Maximum 10 characters")
 
     def input_race(self):
 
-        race = ''
-        length_warning = ''
-        while race == '' or len(race) > 12:
-            print("Suggestions: Human, Elf, Dwarf")
-            print("   ---   ")
-            race = input(f"Enter player race{length_warning}: ")
-            length_warning = " (Maximun 12 charachters)"
-
-        return race
+        race = input("Enter player race: (Suggestions: Human, Elf, Dwarf etc.)\n")
+        if len(race) <= 12:
+            return race
+        else:
+            raise CharacterLengthExceeded("Maximum 12 characters")
 
     def input_weapon(self):
 
-        weapon = ''
-        length_warning = ''
-        while weapon == '' or len(weapon) > 12:
-            print("Suggestions: Sword, Axe, Hammer")
-            print("   ---   ")
-            weapon = input(f"Enter player name{length_warning}: ")
-            length_warning = " (Maximun 12 charachters)"
-        return weapon
+        weapon = input("Enter player weapon: (Suggestions: Sword, Axe, Bow etc.)\n")
+        if len(weapon) <= 15:
+            return weapon
+        else:
+            raise CharacterLengthExceeded("Maximum 15 characters")
     
     def create_player(self):
-        print("------")
-        name = self.input_name()
-        print("------")
-        gender = self.input_gender()
-        print('------')
-        race = self.input_race()
-        print("------")
-        weapon = self.input_weapon()
-        print('------')
-        newPlayer = Player(self.player_id, name, gender, race, weapon)
-        self.players.append(newPlayer)
+
+        name, gender, race, weapon = self.get_details_input()
+        new_player = Player(self.player_id, name, gender, race, weapon)
+        player_with_stats = self.add_stats_to_player(new_player)
+        self.players.append(player_with_stats)
         self.player_id += 1
-        print("Generating player avatar...")
-        return newPlayer
+        return player_with_stats
 
     
     def create_prompt_for_avatar(self, player):
@@ -79,6 +62,84 @@ class PlayerCreator:
     
     def generatePlayerAvatar(imageGenerator, prompt):
         imageGenerator.generateImage(prompt)
+    
+    def add_stats_to_player(self, player):
+        print("\nYou have 5 stat points to add. Choose wisely!")
+        points_left = 5
+        while points_left > 0:
+            print("\nPlayer Stats:")
+            print(f"Health: {player.health}")
+            print(f"Strength: {player.strength}")
+            print(f"Stamina: {player.stamina}")
+            print("--------------------")
+            print(f"\nYou have {points_left} points left.")
+            print("1. Increase Health")
+            print("2. Increase Strength")
+            print("3. Increase Stamina")
+            choice = input("Enter your choice (1/2/3): ")
+
+            if choice == '1':
+                player.increase_health(1)
+                points_left -= 1
+            elif choice == '2':
+                player.increase_strength(1)
+                points_left -= 1
+            elif choice == '3':
+                player.increase_stamina(1)
+                points_left -= 1
+            else:
+                print("Invalid choice. Please enter a valid option.")
+
+        print("\nStats added successfully!")
+        return player
+
+    def get_details_input(self):
+        print("------")
+        while True:
+            try:
+                name = self.input_name()
+                break 
+            except CharacterLengthExceeded as exception:
+                print(exception)
+        print("------")
+        while True:
+            try:
+                gender = self.input_gender()
+                break 
+            except CharacterLengthExceeded as exception:
+                print(exception)        
+        print('------')
+        while True:
+            try:
+                race = self.input_race()
+                break
+            except CharacterLengthExceeded as exception:
+                print(exception)
+        print("------")
+        while True:
+            try:
+                weapon = self.input_weapon()
+                break
+            except CharacterLengthExceeded as exception:
+                print(exception)
+        print('------')
+        return (name, gender, race, weapon)
+
+    def show_player_info(self, player):
+        print("Player Info")
+        print("---------------")
+        print(f"Name: {player.name}")
+        print(f"Gender: {player.gender}")
+        print(f"Race: {player.race}")
+        print(f"Weapon: {player.weapon}")
+        print(f"\nHealth: {player.health}")
+        print(f"Strength: {player.strength}")
+        print(f"Stamina: {player.stamina}")
+        print("---------------")
+
+
+
+
     
 
 
