@@ -1,7 +1,8 @@
 from main_menu import MainMenu
 from room import Room, RoomType
 import random
-from game_over import show_victory_message
+from game_over import show_victory_message, show_death_message
+from enemy import enemies
 import sys
 
 MAIN_MENU = MainMenu()
@@ -53,11 +54,37 @@ class StandardGame:
     def play_game(self):
         self.show_intro()
         while not self.game_over:
-            choice = self.choose_direction()
+            direction_choice = self.choose_direction()
             self.player.choices += 1
-            print(f"\n{choice.description}")
+            enemy_probabilities = direction_choice.enemy_probabilities
+            found_enemy_type = None
+            for enemy in enemy_probabilities:
+                if random.random() < enemy_probabilities[enemy]:
+                    found_enemy_type = enemy
+                    break
+            if found_enemy_type:
+                for enemy in enemies:
+                    if enemy.enemy_type == found_enemy_type:
+                        found_enemy = enemy
+                action_choice = self.handle_enemy(found_enemy)
+                if action_choice == "1":
+                    self.fight_enemy(found_enemy)
+                else:
+                    self.player.run_away(found_enemy)
+                    if self.player.stamina < 0:
+                        while True:
+                            print("\nYou do not have enough stamina to run away!")
+                            print("You must fight instead.")
+                            action_choice = self.handle_enemy(found_enemy)
+                            if action_choice == "1":
+                                self.fight_enemy(found_enemy)
+                                break
+                    else:
+                        print(f"\nSuccess! You escaped the {found_enemy.enemy_type.value}!")
+
+            print(f"\n{direction_choice.description}")
             # Check if player wins based on win_probability
-            win = random.random() < choice.win_probability
+            win = random.random() < direction_choice.win_probability
             if win:
                 play_again = show_victory_message()
                 if play_again == "1":
@@ -66,6 +93,33 @@ class StandardGame:
                     sys.exit()
                 
             else:
-                print(f"\n You continue on past the {choice.type.value}")
+                print(f"\n You continue on past the {direction_choice.type.value}")
+    
+    def handle_enemy(self, enemy):
+        print(f"\n You have encountered a {enemy.enemy_type.value}!")
+        print("Do you want to:")
+        print("1. Fight")
+        print("2. Run away")
+        print("------")
+        while True:
+            choice = input("Your choice: ")
+            if choice == "1" or choice == "2":
+                return choice
+    
+    def fight_enemy(self, enemy):
+        self.player.fight(enemy)
+        if self.player.is_dead():
+            print(f"\nYou have been killed by the {enemy.enemy_type.value}!")
+            play_again = show_death_message()
+            if play_again == "1":
+                self.play_game()
+            else:
+                sys.exit()
+        else:
+            print(f"\nYou have defeated the {enemy.enemy_type.value}!")
+    
+
+
+
 
         

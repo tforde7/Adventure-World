@@ -31,6 +31,14 @@ class Player:
     def is_dead(self):
         return self.health <= 0
     
+    def fight(self, enemy):
+        print("\nA fierce battle rages..")
+        self.health -= enemy.strength
+
+    def run_away(self, enemy):
+        print("\nYou attempt to run away..")
+        self.stamina -= 3
+    
 
 
     
