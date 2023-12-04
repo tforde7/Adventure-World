@@ -1,3 +1,13 @@
+from enum import Enum
+
+class FightResult(Enum):
+    WIN = 1
+    LOSE = 2
+
+class RunAwayResult(Enum):
+    SUCCESS = 1
+    FAILURE = 2
+
 class Player:
     def __init__(self, id, name, gender, race, weapon):
         self.id = id
@@ -34,10 +44,12 @@ class Player:
     def fight(self, enemy):
         print("\nA fierce battle rages..")
         self.health -= enemy.strength
+        return FightResult.WIN if self.health > 0 else FightResult.LOSE
 
     def run_away(self, enemy):
         print("\nYou attempt to run away..")
         self.stamina -= 3
+        return RunAwayResult.SUCCESS if self.stamina > 0 else RunAwayResult.FAILURE
     
 
 
