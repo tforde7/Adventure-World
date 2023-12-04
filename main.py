@@ -3,11 +3,10 @@ from create_player import PlayerCreator
 from openai import OpenAI
 from image_generator import ImageGenerator
 import os
-from play_standard_game import show_play_standard_game
+from play_standard_game import StandardGame
 from play_ai_game import show_play_ai_game
 from options import show_options
 from help import show_help
-from load_game import show_load_game
 import sys
 
 
@@ -42,15 +41,36 @@ def handle_main_menu_choice(user_choice):
                 break
             elif choice == 'n':
                 break
+        show_menu()
     elif user_choice == '2':
-        show_play_standard_game()
+        players = PLAYER_CREATOR.players
+        if len(players) == 0:
+            print("\nYou must first create a player.")
+            show_menu()
+        else:
+            print("Choose a player:")
+            for index, player in enumerate(players, start=1):
+                print(f"{index}. {player.name}")
+        while True:
+            choice = input("\nYour choice: ")
+            try:
+                choice = int(choice)  # Convert input to an integer
+                if 1 <= choice <= len(players):  # Check if the input is within the valid range
+                    break
+                else:
+                    print("Invalid choice. Please select a number from the displayed options.")
+                
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+
+        chosen_player = players[choice - 1]
+        new_game = StandardGame(chosen_player)
+        new_game.play_game()
     elif user_choice == '3':
         show_play_ai_game()
     elif user_choice == '4':
-        show_load_game()
-    elif user_choice == '5':
         show_help()
-    elif user_choice == '6':
+    elif user_choice == '5':
         sys.exit()
 
 def show_menu():

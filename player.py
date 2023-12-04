@@ -8,6 +8,7 @@ class Player:
         self.health = 5
         self.strength = 5
         self.stamina = 5
+        self.choices = 1
     
     def increase_health(self, points):
         self.health += points
