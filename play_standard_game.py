@@ -4,6 +4,7 @@ import random
 from game_over import show_victory_message, show_death_message
 from enemy import enemies
 import sys
+from player import FightResult, RunAwayResult
 
 MAIN_MENU = MainMenu()
 
@@ -70,8 +71,8 @@ class StandardGame:
                 if action_choice == "1":
                     self.fight_enemy(found_enemy)
                 else:
-                    self.player.run_away(found_enemy)
-                    if self.player.stamina < 0:
+                    result = self.player.run_away(found_enemy)
+                    if result == RunAwayResult.FAILURE:
                         while True:
                             print("\nYou do not have enough stamina to run away!")
                             print("You must fight instead.")
@@ -107,8 +108,8 @@ class StandardGame:
                 return choice
     
     def fight_enemy(self, enemy):
-        self.player.fight(enemy)
-        if self.player.is_dead():
+        result = self.player.fight(enemy)
+        if result == FightResult.LOSE:
             print(f"\nYou have been killed by the {enemy.enemy_type.value}!")
             play_again = show_death_message()
             if play_again == "1":
