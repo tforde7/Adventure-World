@@ -12,7 +12,7 @@ def show_victory_message():
             return choice
 
 def show_death_message():
-    print("You lost the game. :( )")
+    print("You lost the game. :( ")
     print("Would you like to play again?")
     print("-----")
     print("1. Play again")
