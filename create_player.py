@@ -36,13 +36,64 @@ class PlayerCreator:
 
     def input_weapon(self):
 
-        weapon = input("Enter player race: (Suggestions: Sword, Axe, Bow etc.)\n")
+        weapon = input("Enter player weapon: (Suggestions: Sword, Axe, Bow etc.)\n")
         if len(weapon) <= 15:
             return weapon
         else:
             raise CharacterLengthExceeded("Maximum 15 characters")
     
     def create_player(self):
+
+        name, gender, race, weapon = self.get_details_input()
+        new_player = Player(self.player_id, name, gender, race, weapon)
+        player_with_stats = self.add_stats_to_player(new_player)
+        self.players.append(player_with_stats)
+        self.player_id += 1
+        return player_with_stats
+
+    
+    def create_prompt_for_avatar(self, player):
+        return f"""
+        An avatar for a fantasy game. The character has the following attributes:
+        Race: {player.race},
+        Gender: {player.gender},
+        Weapon: {player.weapon}
+        """
+    
+    def generatePlayerAvatar(imageGenerator, prompt):
+        imageGenerator.generateImage(prompt)
+    
+    def add_stats_to_player(self, player):
+        print("\nYou have 5 stat points to add. Choose wisely!")
+        points_left = 5
+        while points_left > 0:
+            print("\nPlayer Stats:")
+            print(f"Health: {player.health}")
+            print(f"Strength: {player.strength}")
+            print(f"Stamina: {player.stamina}")
+            print("--------------------")
+            print(f"\nYou have {points_left} points left.")
+            print("1. Increase Health")
+            print("2. Increase Strength")
+            print("3. Increase Stamina")
+            choice = input("Enter your choice (1/2/3): ")
+
+            if choice == '1':
+                player.increase_health(1)
+                points_left -= 1
+            elif choice == '2':
+                player.increase_strength(1)
+                points_left -= 1
+            elif choice == '3':
+                player.increase_stamina(1)
+                points_left -= 1
+            else:
+                print("Invalid choice. Please enter a valid option.")
+
+        print("\nStats added successfully!")
+        return player
+
+    def get_details_input(self):
         print("------")
         while True:
             try:
@@ -72,22 +123,23 @@ class PlayerCreator:
             except CharacterLengthExceeded as exception:
                 print(exception)
         print('------')
-        newPlayer = Player(self.player_id, name, gender, race, weapon)
-        self.players.append(newPlayer)
-        self.player_id += 1
-        return newPlayer
+        return (name, gender, race, weapon)
 
-    
-    def create_prompt_for_avatar(self, player):
-        return f"""
-        An avatar for a fantasy game. The character has the following attributes:
-        Race: {player.race},
-        Gender: {player.gender},
-        Weapon: {player.weapon}
-        """
-    
-    def generatePlayerAvatar(imageGenerator, prompt):
-        imageGenerator.generateImage(prompt)
+    def show_player_info(self, player):
+        print("Player Info")
+        print("---------------")
+        print(f"Name: {player.name}")
+        print(f"Gender: {player.gender}")
+        print(f"Race: {player.race}")
+        print(f"Weapon: {player.weapon}")
+        print(f"\nHealth: {player.health}")
+        print(f"Strength: {player.strength}")
+        print(f"Stamina: {player.stamina}")
+        print("---------------")
+
+
+
+
     
 
 
