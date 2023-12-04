@@ -1,10 +1,10 @@
 from main_menu import MainMenu
 from create_player import PlayerCreator
 from openai import OpenAI
-from image_generator import ImageGenerator
+from AI.image_generator import ImageGenerator
 import os
 from play_standard_game import StandardGame
-from play_ai_game import show_play_ai_game
+from AI.play_ai_game import show_play_ai_game
 import sys
 
 

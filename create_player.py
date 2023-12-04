@@ -1,4 +1,3 @@
-# from main import show_menu
 from player import Player
 
 class CharacterLengthExceeded(Exception):
