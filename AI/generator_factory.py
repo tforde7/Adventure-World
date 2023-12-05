@@ -5,7 +5,7 @@ from AI.text_generator import TextGenerator
 
 class GeneratorFactory():
     # This key will be revoked after the project is graded
-    CLIENT = OpenAI(api_key="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")
+    CLIENT = OpenAI(api_key="")
 
     @staticmethod
     def get_image_generator():
