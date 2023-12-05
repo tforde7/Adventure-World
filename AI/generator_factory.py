@@ -1,10 +1,11 @@
 from openai import OpenAI
 from AI.audio_generator import AudioGenerator
 from AI.image_generator import ImageGenerator
+from AI.text_generator import TextGenerator
 
 class GeneratorFactory():
-    # This key will be revoked after project is graded
-    CLIENT = OpenAI(api_key="")
+    # This key will be revoked after the project is graded
+    CLIENT = OpenAI(api_key="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")
 
     @staticmethod
     def get_image_generator():
@@ -16,6 +17,6 @@ class GeneratorFactory():
 
     @staticmethod
     def get_text_genrator():
-        pass
+        return TextGenerator(GeneratorFactory.CLIENT)
 
 

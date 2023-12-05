@@ -9,8 +9,6 @@ class RoomType(Enum):
     RIVER = "river"
     MOUNTAIN = "mountain"
 
-
-
 ROOM_DESCRIPTIONS = {
     RoomType.CAVE: [
         "You find yourself in a dimly lit cave with mysterious markings on the walls.",
@@ -64,7 +62,6 @@ ENEMY_PROBABILITIES = {
         EnemyType.GOBLIN: 0.2
     }
 }
-
 
 class Room:
     def __init__(self, type, description, win_probability, enemy_probabilities):

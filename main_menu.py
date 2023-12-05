@@ -3,6 +3,7 @@ from create_player import PlayerCreator
 from AI.generator_factory import GeneratorFactory
 from options import Options
 import sys
+from play_ai_game import AIGame
 
 class MainMenu:
 
@@ -91,7 +92,27 @@ class MainMenu:
         new_game.play_game()
 
     def handle_play_ai_game(self):
-        self.show_menu()
+        players = self.player_creator.players
+        if len(players) == 0:
+            print("\nYou must first create a player.")
+            self.show_menu()
+        else:
+            print("Choose a player:")
+            for index, player in enumerate(players, start=1):
+                print(f"{index}. {player.name}")
+        while True:
+            choice = input("\nYour choice: ")
+            try:
+                choice = int(choice)  # Convert input to an integer
+                if 1 <= choice <= len(players):  # Check if the input is within the valid range
+                    break
+                else:
+                    print("Invalid choice. Please select a number from the displayed options.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+        chosen_player = players[choice - 1]
+        new_game = AIGame(self, chosen_player)
+        new_game.play_game()
 
     def handle_options(self):
         self.options.showOptionsMenu()
