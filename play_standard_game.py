@@ -1,4 +1,3 @@
-from main_menu import MainMenu
 from room import Room, RoomType
 import random
 from game_over import show_victory_message, show_death_message
@@ -6,10 +5,9 @@ from enemy import enemies
 import sys
 from player import FightResult, RunAwayResult
 
-MAIN_MENU = MainMenu()
-
 class StandardGame:
-    def __init__(self, player) -> None:
+    def __init__(self, main_menu, player) -> None:
+        self.main_menu = main_menu
         self.player = player
         self.game_over = False
 
