@@ -1,3 +1,23 @@
+"""
+This module defines a PlayerCreator class responsible for creating player instances.
+It interacts with the Player class from the 'player' module to create player avatars with specific attributes
+such as name, gender, race, and weapon. It allows users to assign stats (health, strength, and stamina) to the players.
+
+The PlayerCreator class includes the following methods:
+- input_name: Accepts player name input within a specified character limit.
+- input_gender: Accepts player gender input within a specified character limit.
+- input_race: Accepts player race input within a specified character limit.
+- input_weapon: Accepts player weapon input within a specified character limit.
+- create_player: Creates a new player with the provided details and adds stats to the player.
+- create_prompt_for_avatar: Generates a prompt for a game avatar based on player attributes.
+- generatePlayerAvatar: Calls an image generator to create an avatar based on a given prompt.
+- add_stats_to_player: Allows users to allocate stat points (health, strength, stamina) to a player.
+- get_details_input: Gathers player details using input methods and handles character length exceptions.
+- show_player_info: Displays information about a player's attributes and stats.
+- CharacterLengthExceeded: Custom exception class raised when input character limits are exceeded.
+"""
+
+
 from player import Player
 
 class CharacterLengthExceeded(Exception):

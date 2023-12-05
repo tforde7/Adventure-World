@@ -1,3 +1,17 @@
+"""
+    A class responsible for generating text using OpenAI's gpt-3.5-turbo model.
+
+    Attributes:
+        ASTRA_DB_KEYSPACE (str): The keyspace for Cassandra database.
+
+    Methods:
+        __init__(client): Initializes the TextGenerator with required parameters and initializes database memory.
+        set_player(player): Sets the player for the game.
+        generate(): Generates text for the game based on the current state and player input.
+        set_human_input(input): Sets the human input for generating the next response.
+        get_template(): Retrieves the template for generating the narrative experience.
+        get_prompt(): Retrieves the prompt template based on the conversation history and user input.
+"""
 from langchain.llms import OpenAI
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
@@ -66,6 +80,7 @@ class TextGenerator:
         #     "story": story,
         #     "player-details": player_details,
         # }
+        
         text_response = self.llm_chain.predict(human_input=self.human_input)
         cleaned_response = text_response.strip()
         return cleaned_response

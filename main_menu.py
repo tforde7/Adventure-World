@@ -1,3 +1,19 @@
+"""
+This module defines a MainMenu class responsible for displaying a menu interface and 
+handling user choices for various game options. It interacts with other modules and classes to create players, 
+initiate standard games, AI games, and manage game options.
+
+The MainMenu class includes the following methods:
+- __init__: Initializes instances of PlayerCreator, GeneratorFactory, and Options for handling player creation, image generation, and game options.
+- get_user_choice: Retrieves the user's choice from the menu.
+- show_menu: Displays the menu options and handles user input for choices.
+- handle_choice: Processes the user's selected choice from the menu and calls respective methods.
+- handle_create_player: Manages the creation of a new player, generates an avatar if requested, and returns to the main menu.
+- handle_play_standard_game: Handles the process of initiating a standard game, allowing the user to select a player, and starting the game.
+- handle_play_ai_game: Handles the process of initiating an AI game, allowing the user to select a player, and starting the game against AI.
+- handle_options: Calls the Options class methods to display and manage game options.
+"""
+
 from play_standard_game import StandardGame
 from create_player import PlayerCreator
 from AI.generator_factory import GeneratorFactory

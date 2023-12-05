@@ -1,3 +1,34 @@
+"""
+The StandardGame class manages a standard text-based game for the player, navigating through rooms, 
+encountering enemies, and making choices.
+
+Attributes:
+    - main_menu: Instance of the MainMenu class to return control back to the main menu if needed.
+    - player: The player object participating in the game.
+    - audio_enabled: Boolean indicating if audio feedback is enabled for the game.
+    - game_over: Flag indicating whether the game is over or not.
+    - audio_generator: Instance of the audio generator obtained from GeneratorFactory if audio is enabled, else None.
+
+Methods:
+    - __init__: Initializes the StandardGame object with the main menu, player, and audio settings.
+    - show_intro: Displays the introductory story prompting the player to begin the adventure.
+    - choose_direction: Prompts the player to choose a direction (left or right) to progress in the game.
+    - create_fork: Creates a fork in the road, generating different types of rooms for the player to explore.
+    - play_game: Controls the flow of the game, handles room choices, encounters enemies, and manages the game's progression.
+    - handle_enemy: Handles encounters with enemies, allowing the player to choose whether to fight or run away.
+    - fight_enemy: Manages the combat with an enemy, evaluating the fight result and determining the game's outcome.
+    - generate_audio: Generates audio feedback for specific game prompts when audio feedback is enabled.
+
+The play_game method follows these steps:
+    - Shows the game's introductory story.
+    - Loops through the game until it's over, allowing the player to choose directions,
+      encounter enemies, and progress through rooms.
+    - Handles enemy encounters, allowing the player to fight or run away.
+    - Determines the game outcome based on room probabilities and enemy encounters, 
+      showcasing victory or defeat scenarios.
+    - Allows the player to play again or exit the game after a win or loss.
+"""
+
 from room import Room, RoomType
 import random
 from game_over import show_victory_message, show_death_message, get_death_prompt, get_victory_prompt
