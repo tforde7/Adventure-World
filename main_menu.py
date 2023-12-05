@@ -6,8 +6,7 @@ import sys
 
 class MainMenu:
 
-    def __init__(self, openai_client) -> None:
-        self.openai_client = openai_client
+    def __init__(self) -> None:
         self.player_creator = PlayerCreator()
         self.image_generator = ImageGenerator(None)
         self.options = Options(self)
@@ -86,11 +85,12 @@ class MainMenu:
             except ValueError:
                 print("Invalid input. Please enter a number.")
         chosen_player = players[choice - 1]
-        new_game = StandardGame(self, chosen_player)
+        audio_enabled = self.options.audio_enabled
+        new_game = StandardGame(self, chosen_player, audio_enabled)
         new_game.play_game()
 
     def handle_play_ai_game(self):
-        pass
+        self.show_menu()
 
     def handle_options(self):
         self.options.showOptionsMenu()
