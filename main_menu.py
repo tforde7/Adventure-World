@@ -1,6 +1,6 @@
 from play_standard_game import StandardGame
 from create_player import PlayerCreator
-from AI.image_generator import ImageGenerator
+from AI.generator_factory import GeneratorFactory
 from options import Options
 import sys
 
@@ -8,7 +8,7 @@ class MainMenu:
 
     def __init__(self) -> None:
         self.player_creator = PlayerCreator()
-        self.image_generator = ImageGenerator(None)
+        self.image_generator = GeneratorFactory.get_image_generator()
         self.options = Options(self)
 
     def get_user_choice(self):
@@ -58,6 +58,7 @@ class MainMenu:
                     input("Avatar generated. Press enter to view..")
                     self.image_generator.save_image(image)
                     self.image_generator.display_image(image)
+                    break
                 except AttributeError:
                     print("API key not set")
                 break
