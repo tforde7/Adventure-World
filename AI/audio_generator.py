@@ -1,4 +1,5 @@
 import subprocess
+import platform
 
 class AudioGenerator:
     """
@@ -15,6 +16,7 @@ class AudioGenerator:
     """
 
     AUDIO_FILE_PATH = "audio.mp3"
+    WINDOWS_SYSTEM_NAME = "Windows"
 
     def __init__(self, client):
         self.client = client
@@ -33,5 +35,10 @@ class AudioGenerator:
 
     def play_audio(self):
         audio_file_path = AudioGenerator.AUDIO_FILE_PATH
-        subprocess.run(['afplay', audio_file_path])
+
+        if platform.system() == AudioGenerator.WINDOWS_SYSTEM_NAME:
+            subprocess.run(['start', audio_file_path], shell=True)
+        else:
+            # If not Windows, macOS is assumed
+            subprocess.run(['afplay', audio_file_path])
 

@@ -130,11 +130,14 @@ class TextGenerator:
 
             Here are some rules to follow:
             1. Start by greeting the player and introducing the story
-            2. After you greet them, ask them to choose a weapon which they wil have to use later in the game.
+            2. After you greet them, ask them to choose a weapon which they will have to use later in the game.
             3. Be creative and witty with the player's response even if it seems to make no sense.
             4. Never respond by saying something is not possible. Always adapt your response to the what the player has said.
-            5. Have a few paths that lead to success. If the player defeats Voldemort generate a response that explains the win and ends in the text "The end.", I will search for this text to end the game.
-            6. Have some paths that lead to death. If the player dies generate a response that explains the death and ends in the text: "The end.", I will search for this text to end the game.
+            5. Have a few paths that lead to success. If the player finds the Stone of Eternity
+              generate a response that explains the win and ends in the text "The end.", 
+              I will search for this text to end the game.
+            6. Have some paths that lead to death. If the player dies generate a response that explains
+              the death and ends in the text: "The end.", I will search for this text to end the game.
 
             Here is the chat history, use this to understand what to say next: {chat_history}
             Human: {human_input}
